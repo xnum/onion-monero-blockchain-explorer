@@ -4952,6 +4952,21 @@ public:
 
         } // for (pair<txout_to_key, uint64_t>& outp: txd.output_pub_keys)
 
+        // decrypt encrypted payment id, as used in integreated addresses
+        crypto::hash8 decrypted_payment_id8 = txd.payment_id8;
+        string plain_pid_str = pod_to_hex(txd.payment_id);
+
+        string decrypted_payment_id8_str = plain_pid_str;
+
+        if (decrypted_payment_id8 != null_hash8)
+        {
+            if (mcore->get_device()->decrypt_payment_id(decrypted_payment_id8, pub_key, prv_view_key))
+            {
+                decrypted_payment_id8_str = pod_to_hex(decrypted_payment_id8);
+            }
+        }
+
+
         // return parsed values. can be use to double
         // check if submited data in the request
         // matches to what was used to produce response.
@@ -4959,7 +4974,7 @@ public:
         j_data["address"]  = pod_to_hex(address_info.address);
         j_data["viewkey"]  = pod_to_hex(prv_view_key);
         j_data["tx_prove"] = tx_prove;
-
+        j_data["payment_id"] = decrypted_payment_id8_str;
         j_response["status"] = "success";
 
         return j_response;
