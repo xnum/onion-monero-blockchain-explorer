@@ -4975,6 +4975,7 @@ public:
         j_data["viewkey"]  = pod_to_hex(prv_view_key);
         j_data["tx_prove"] = tx_prove;
         j_data["payment_id"] = decrypted_payment_id8_str;
+        j_data["tx_fee"] = xmreg::xmr_amount_to_str(txd.fee, "{:0.12f}", false);
         j_response["status"] = "success";
 
         return j_response;
