@@ -4971,6 +4971,7 @@ public:
         // check if submited data in the request
         // matches to what was used to produce response.
         j_data["tx_hash"]  = pod_to_hex(txd.hash);
+        j_data["tx_pub"]  = pod_to_hex(txd.pk);
         j_data["address"]  = pod_to_hex(address_info.address);
         j_data["viewkey"]  = pod_to_hex(prv_view_key);
         j_data["tx_prove"] = tx_prove;
