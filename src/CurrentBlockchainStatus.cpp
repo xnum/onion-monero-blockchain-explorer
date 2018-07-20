@@ -305,6 +305,10 @@ string CurrentBlockchainStatus::output_file {"emission_amount.txt"};
 
 string CurrentBlockchainStatus::deamon_url {"http:://127.0.0.1:18081"};
 
+string CurrentBlockchainStatus::login_user {""};
+
+string CurrentBlockchainStatus::login_pass {""};
+
 uint64_t  CurrentBlockchainStatus::blockchain_chunk_size {10000};
 
 uint64_t  CurrentBlockchainStatus::blockchain_chunk_gap {3};

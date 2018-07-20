@@ -70,7 +70,11 @@ namespace xmreg
                 ("ssl-key-file", value<string>(),
                  "path to key file for ssl (https) functionality")
                 ("deamon-url,d", value<string>()->default_value("http:://127.0.0.1:18081"),
-                 "Monero deamon url");
+                 "Monero deamon url")
+                ("login-user,U", value<string>()->default_value(""),
+                 "Monero deamon login user")
+                ("login-pass,P", value<string>()->default_value(""),
+                 "Monero deamon login password");
 
 
         store(command_line_parser(acc, avv)

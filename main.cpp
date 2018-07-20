@@ -46,6 +46,8 @@ main(int ac, const char* av[])
     auto port_opt                      = opts.get_option<string>("port");
     auto bc_path_opt                   = opts.get_option<string>("bc-path");
     auto deamon_url_opt                = opts.get_option<string>("deamon-url");
+    auto login_user_opt                = opts.get_option<string>("login-user");
+    auto login_pass_opt                = opts.get_option<string>("login-pass");
     auto ssl_crt_file_opt              = opts.get_option<string>("ssl-crt-file");
     auto ssl_key_file_opt              = opts.get_option<string>("ssl-key-file");
     auto no_blocks_on_index_opt        = opts.get_option<string>("no-blocks-on-index");
@@ -171,6 +173,9 @@ main(int ac, const char* av[])
     if (stagenet && deamon_url == "http:://127.0.0.1:18081")
         deamon_url = "http:://127.0.0.1:38081";
 
+    string login_user {*login_user_opt};
+    string login_pass {*login_pass_opt};
+
     uint64_t mempool_info_timeout {5000};
 
     try
@@ -207,6 +212,10 @@ main(int ac, const char* av[])
                 = nettype;
         xmreg::CurrentBlockchainStatus::deamon_url
                 = deamon_url;
+        xmreg::CurrentBlockchainStatus::login_user
+                = login_user;
+        xmreg::CurrentBlockchainStatus::login_pass
+                = login_pass;
         xmreg::CurrentBlockchainStatus::set_blockchain_variables(
                 &mcore, core_storage);
 
@@ -224,6 +233,10 @@ main(int ac, const char* av[])
             = nettype;
     xmreg::MempoolStatus::deamon_url
             = deamon_url;
+    xmreg::MempoolStatus::login_user
+            = login_user;
+    xmreg::MempoolStatus::login_pass
+            = login_pass;
     xmreg::MempoolStatus::set_blockchain_variables(
             &mcore, core_storage);
 
@@ -256,6 +269,8 @@ main(int ac, const char* av[])
     xmreg::page xmrblocks(&mcore,
                           core_storage,
                           deamon_url,
+                          login_user,
+                          login_pass,
                           nettype,
                           enable_pusher,
                           enable_js,

@@ -9,6 +9,8 @@ namespace xmreg
 
 
 rpccalls::rpccalls(string _deamon_url,
+         string _login_user,
+         string _login_pass,
          uint64_t _timeout)
         : deamon_url {_deamon_url},
           timeout_time {_timeout}
@@ -19,9 +21,15 @@ rpccalls::rpccalls(string _deamon_url,
 
     timeout_time_ms = std::chrono::milliseconds {timeout_time};
 
-    m_http_client.set_server(
-            deamon_url,
-            boost::optional<epee::net_utils::http::login>{});
+    if(_login_user.size() > 0) {
+        m_http_client.set_server(
+                deamon_url,
+                epee::net_utils::http::login{_login_user, _login_pass});
+    } else {
+        m_http_client.set_server(
+                deamon_url,
+                boost::optional<epee::net_utils::http::login>{});
+    }
 }
 
 bool

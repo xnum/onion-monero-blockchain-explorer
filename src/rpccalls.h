@@ -82,6 +82,7 @@ class rpccalls
 public:
 
     rpccalls(string _deamon_url = "http:://127.0.0.1:18081",
+             string _login_user = "", string _login_pass = "",
              uint64_t _timeout = 200000);
 
     bool

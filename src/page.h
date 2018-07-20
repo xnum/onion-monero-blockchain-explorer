@@ -345,6 +345,8 @@ public:
     page(MicroCore* _mcore,
          Blockchain* _core_storage,
          string _deamon_url,
+         string _login_user,
+         string _login_pass,
          cryptonote::network_type _nettype,
          bool _enable_pusher,
          bool _enable_js,
@@ -362,7 +364,7 @@ public:
          string _mainnet_url)
             : mcore {_mcore},
               core_storage {_core_storage},
-              rpc {_deamon_url},
+              rpc {_deamon_url, _login_user, _login_pass},
               server_timestamp {std::time(nullptr)},
               nettype {_nettype},
               enable_pusher {_enable_pusher},

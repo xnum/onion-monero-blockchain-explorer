@@ -123,6 +123,7 @@ struct MempoolStatus
 
     static bf::path blockchain_path;
     static string deamon_url;
+    static string login_user, login_pass;
     static cryptonote::network_type nettype;
 
     // make object for accessing the blockchain here
